@@ -2,8 +2,17 @@ require "sinatra"
 require "sinatra/reloader"
 
 get("/") do
-  "
-  <h1>Welcome to your Sinatra App!</h1>
-  <p>Define some routes in app.rb</p>
-  "
+erb(:home)
+end
+
+get("/process_roll") do
+  @arr = []
+  @dice=params.fetch("dice").to_i
+  @sides=params.fetch("sides").to_i
+  
+  @dice.times do
+   @arr.push(rand(1..@sides))
+  end
+
+  erb(:process)
 end
